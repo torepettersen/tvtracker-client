@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `
+    <navbar></navbar>
+    <router-outlet></router-outlet>
+  `,
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
