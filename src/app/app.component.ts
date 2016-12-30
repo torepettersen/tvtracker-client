@@ -5,8 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <navbar></navbar>
     <router-outlet></router-outlet>
-  `,
-  styleUrls: ['./app.component.sass']
+  `
 })
 export class AppComponent {
   title = 'app works!';
