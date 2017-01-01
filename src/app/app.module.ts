@@ -5,8 +5,8 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component';
-import { NavbarModule } from './navbar'
-import {SignupModule} from "./signup/signup.module"
+import { NavbarModule } from './modules/navbar';
+import {SignupModule} from './modules/signup';
 
 @NgModule({
   declarations: [
