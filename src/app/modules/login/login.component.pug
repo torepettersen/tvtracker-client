@@ -1,0 +1,9 @@
+
+.container
+  .col-md-6.offset-md-3.login
+    h2 Login
+    form([formGroup]='loginForm', (ngSubmit)='login()')
+      form-control-group([key]='"email"', [label]='"Email"', [form]='loginForm', [type]='"email"')
+      form-control-group([key]='"password"', [label]='"Password"', [form]='loginForm', [type]='"password"')
+      .form-group
+        button.btn.btn-primary(type='submit' [disable]='loginForm.control.errors') Login

@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Route, RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
-import { SignupComponent } from './signup.component';
+import {LoginComponent} from './login.component';
 import {FormModule} from '../form/form.module';
 import {UserService} from '../../services/user/user.service';
 
 const ROUTES: Route[] = [
-  { path: 'signup', component: SignupComponent},
+  { path: 'login', component: LoginComponent},
 ]
 
 @NgModule({
@@ -17,9 +17,9 @@ const ROUTES: Route[] = [
     RouterModule.forChild(ROUTES),
     FormModule
   ],
-  declarations: [SignupComponent],
+  declarations: [LoginComponent],
   providers: [
     UserService
   ]
 })
-export class SignupModule { }
+export class LoginModule { }
