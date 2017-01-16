@@ -4,6 +4,7 @@ import {Route, RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SignupComponent } from './signup.component';
 import {FormModule} from '../form/form.module';
+import {UserService} from '../../services/user/user.service';
 
 
 const ROUTES: Route[] = [
@@ -17,6 +18,9 @@ const ROUTES: Route[] = [
     RouterModule.forChild(ROUTES),
     FormModule
   ],
-  declarations: [SignupComponent]
+  declarations: [SignupComponent],
+  providers: [
+    UserService
+  ]
 })
 export class SignupModule { }

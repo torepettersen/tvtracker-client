@@ -16,6 +16,7 @@ export class FormControlGroupComponent {
   @Input() key: string;
   @Input() label: string;
   @Input() form: FormGroup;
+  @Input() type: string = "text"
 
   constructor(private validationService: ValidationService) { }
 

@@ -3,8 +3,8 @@
   .col-md-6.offset-md-3.signup
     h2 Register
     form([formGroup]='signupForm', (ngSubmit)='signup()')
-      form-control-group([key]='"email"', [label]='"Email"', [form]='signupForm')
-      form-control-group([key]='"password"', [label]='"Password"', [form]='signupForm')
+      form-control-group([key]='"email"', [label]='"Email"', [form]='signupForm', [type]='"email"')
+      form-control-group([key]='"password"', [label]='"Password"', [form]='signupForm', [type]='"password"')
       .form-group
         button.btn.btn-primary(type='submit' [disable]='signupForm.control.errors') Register
     //form((ngSubmit)='signup()', #f='ngForm')

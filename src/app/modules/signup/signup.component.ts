@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {ValidationService} from '../form';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -28,8 +30,13 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    console.log(this.signupForm.value.email)
-    console.log(this.signupForm.value.email)
+    if(!this.signupForm.valid) return;
+
+    this.userService.signup(
+      this.signupForm.value.email,
+      this.signupForm.value.password
+    )
+      .subscribe(res => {})
   }
 
   showError(control: FormControl) {

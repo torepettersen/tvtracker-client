@@ -2,8 +2,8 @@
 .form-group([formGroup]='form', [class.has-danger]='showError(form.controls[key])')
   label.form-control-label(for='{{key}}') {{label}}
   input.form-control(
-  [class.form-control-danger]='showError(form.controls[key])',
-    type='text',
+    [class.form-control-danger]='showError(form.controls[key])',
+    type='{{type}}',
     id='{{key}}',
     formControlName='{{key}}',
     placeholder='{{label}}'
