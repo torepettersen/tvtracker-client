@@ -7,7 +7,7 @@ import {FormModule} from '../form/form.module';
 import {UserService} from '../../services/user/user.service';
 
 const ROUTES: Route[] = [
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent}
 ]
 
 @NgModule({
