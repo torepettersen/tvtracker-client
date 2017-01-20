@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavbarModule } from './modules/navbar';
 import {SignupModule} from './modules/signup';
 import {LoginModule} from './modules/login';
+import {SearchModule} from './modules/search';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {LoginModule} from './modules/login';
     RouterModule.forRoot([]),
     NavbarModule,
     SignupModule,
-    LoginModule
+    LoginModule,
+    SearchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

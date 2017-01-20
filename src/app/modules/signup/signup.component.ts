@@ -10,7 +10,6 @@ import {UserService} from '../../services/user/user.service';
 })
 export class SignupComponent implements OnInit {
   signupForm : FormGroup
-  //email: String
 
   constructor(
     private fb: FormBuilder,

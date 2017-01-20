@@ -1,6 +1,6 @@
 
 .container
-  .col-md-6.offset-md-3.signup
+  .col-md-6.offset-md-3
     h2 Register
     form([formGroup]='signupForm', (ngSubmit)='signup()')
       form-control-group([key]='"email"', [label]='"Email"', [form]='signupForm', [type]='"email"')

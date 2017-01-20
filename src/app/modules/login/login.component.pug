@@ -1,6 +1,6 @@
 
 .container
-  .col-md-6.offset-md-3.login
+  .col-md-6.offset-md-3
     h2 Login
     form([formGroup]='loginForm', (ngSubmit)='login()')
       form-control-group([key]='"email"', [label]='"Email"', [form]='loginForm', [type]='"email"')
