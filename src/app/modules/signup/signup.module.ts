@@ -4,7 +4,7 @@ import {Route, RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SignupComponent } from './signup.component';
 import {FormModule} from '../form/form.module';
-import {UserService} from '../../services/user/user.service';
+import {UserService} from '../../services/user.service';
 
 const ROUTES: Route[] = [
   { path: 'signup', component: SignupComponent},

@@ -1,7 +1,13 @@
 
 .container
   .row
-    .col-md-12
-      div(*ngFor='let show of shows')
-        h1 {{show.name}}
-        p Next episode: {{show.nextEpisode?.airstamp | date}}
+    .col-md-6
+      div(*ngFor='let show of (shows | orderByAirdate:"nextEpisode")')
+        div(*ngIf='show.nextEpisode')
+          h1 {{show.name}}
+          p Next episode: {{show.nextEpisode?.airstamp | date}}
+    .col-md-6
+      div(*ngFor='let show of (shows | orderByAirdate:"previousEpisode":true)')
+        div(*ngIf='show.previousEpisode')
+          h1 {{show.name}}
+          p Last episode: {{show.previousEpisode?.airstamp | date}}

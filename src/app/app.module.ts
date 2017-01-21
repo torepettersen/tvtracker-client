@@ -10,6 +10,7 @@ import {SignupModule} from './modules/signup';
 import {LoginModule} from './modules/login';
 import {SearchModule} from './modules/search';
 import {HomeModule} from './modules/home';
+import { OrderByAirdatePipe } from './pipes/order-by-airdate.pipe';
 
 @NgModule({
   declarations: [

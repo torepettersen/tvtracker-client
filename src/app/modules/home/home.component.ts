@@ -1,8 +1,9 @@
-import {Component, OnInit, OnChanges} from '@angular/core';
+import {Component, OnInit, OnChanges, ChangeDetectionStrategy} from '@angular/core';
 import {TvtrackerService} from '../../services/tvtracker.service';
 import {Show, Episode} from '../../interfaces';
 import {TvMazeService} from '../../services/tv-maze.service';
 import {Observable} from 'rxjs';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -14,29 +15,32 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _tvtrackerService: TvtrackerService,
-    private _tvmazeSerive: TvMazeService
+    private _tvmazeSerive: TvMazeService,
+    private _userService: UserService
   ) { }
 
   ngOnInit() {
-    this._tvtrackerService.subscribedShows()
-      .flatMap(shows => {
-        this.shows = shows
-        return Observable.from(this.shows)
-      })
-      .subscribe((show: Show) => {
-        this._tvmazeSerive.getEpisodes(show.tvmazeId)
-          .subscribe((episodes: Episode[]) => {
-            show.nextEpisode = episodes.find((episode: Episode) => {
-              return new Date(episode.airstamp).getTime() > Date.now()
+    if(this._userService.isAuthenticated()) {
+      this._tvtrackerService.subscribedShows()
+        .flatMap(shows => {
+          this.shows = shows
+          return Observable.from(this.shows)
+        })
+        .subscribe((show: Show) => {
+          this._tvmazeSerive.getEpisodes(show.tvmazeId)
+            .subscribe((episodes: Episode[]) => {
+              show.nextEpisode = episodes.find((episode: Episode) => {
+                return new Date(episode.airstamp).getTime() > Date.now()
+              })
+              show.previousEpisode = episodes.reverse().find((episode: Episode) => {
+                return new Date(episode.airstamp).getTime() < Date.now()
+              })
+
+              let idx = this.shows.indexOf(show)
+              this.shows[idx] = show
             })
-          })
-      })
-
-      /*
-      .subscribe((episodes: Episode[]) => {
-
-        console.log(episodes.find((episode: Episode) => {return new Date(episode.airstamp).getTime() > Date.now()}))
-      })*/
+        })
+    }
 
   }
 

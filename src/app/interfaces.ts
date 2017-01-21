@@ -3,6 +3,7 @@ export interface Show {
   tvmazeId: number
   name: string;
   nextEpisode?: Episode;
+  previousEpisode?: Episode;
   image: {
     medium: string;
   };
