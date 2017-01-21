@@ -6,7 +6,7 @@ import {Show} from '../interfaces';
 
 @Injectable()
 export class TvMazeService {
-  _url: string = 'https://api.tvmaze.com/'
+  _url: string = 'https://api.tvmaze.com'
 
   constructor(private _http: Http) { }
 
@@ -14,7 +14,7 @@ export class TvMazeService {
     const search: URLSearchParams = new URLSearchParams();
     search.set('q', query);
 
-    return this._http.get(this._url + 'search/shows', {search})
+    return this._http.get(this._url + '/search/shows', {search})
       .map(res => {
         let data = res.json()
         let shows: Array<Show> = []
@@ -24,5 +24,11 @@ export class TvMazeService {
 
         return shows
       })
+  }
+
+  getEpisodes(showId: number) {
+    let query = this._url + '/shows/' + showId + '/episodes'
+    return this._http.get(query)
+      .map(res => res.json())
   }
 }

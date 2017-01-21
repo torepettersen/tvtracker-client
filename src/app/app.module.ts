@@ -9,6 +9,7 @@ import { NavbarModule } from './modules/navbar';
 import {SignupModule} from './modules/signup';
 import {LoginModule} from './modules/login';
 import {SearchModule} from './modules/search';
+import {HomeModule} from './modules/home';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {SearchModule} from './modules/search';
     HttpModule,
     RouterModule.forRoot([]),
     NavbarModule,
+    HomeModule,
     SignupModule,
     LoginModule,
     SearchModule

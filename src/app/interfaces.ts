@@ -1,7 +1,8 @@
 export interface Show {
   id: number;
+  tvmazeId: number
   name: string;
-  nextEpisode?: Object;
+  nextEpisode?: Episode;
   image: {
     medium: string;
   };

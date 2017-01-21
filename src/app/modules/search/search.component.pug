@@ -8,22 +8,16 @@
         span.input-group-addon Search
         input.form-control(type='text', autofocus, formControlName='search')
   table.table
-    //thead
-      tr
-        th
-        th Name
-        th Next episode
-        th
     tbody
       tr(*ngFor='let show of shows')
         th.th-img
-          img.rounded(*ngIf='show.image' ,src='{{show.image.medium}}')
+          img.rounded(src='{{show.image?.medium}}')
         th
           h4 {{show.name}}
           div([innerHtml]='show.summary')
         th
           .btn-group
-            button.btn.btn-success(type="button") Subscribe
+            button.btn.btn-success(type="button", (click)='subscribe(show)') Subscribe
             button.btn.btn-info(type="button") Episodes
 
 

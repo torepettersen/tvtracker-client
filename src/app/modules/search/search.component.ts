@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {TvMazeService} from '../../services/tv-maze.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidationService} from '../form/form-validation.service';
-import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/debounceTime'
 import 'rxjs/add/operator/filter'
 import 'rxjs/add/operator/distinctUntilChanged'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/map'
 import {Show} from '../../interfaces';
-//import 'rxjs/add/operator/selectMany'
+import {TvtrackerService} from '../../services/tvtracker.service';
 
 @Component({
   selector: 'app-search',
@@ -23,7 +22,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private validationService: ValidationService,
-    private tvMaze: TvMazeService
+    private tvMaze: TvMazeService,
+    private tvtrackerService: TvtrackerService
   ) { }
 
   ngOnInit() {
@@ -47,14 +47,17 @@ export class SearchComponent implements OnInit {
         return this.tvMaze.search(query)
       })
       .subscribe(res => {
-        console.log(res)
         this.shows = res
       })
   }
 
   search(event : any) {
-    console.log(event.target.value)
     this.tvMaze.search(event.target.value)
+  }
+
+  subscribe(show: Show) {
+    this.tvtrackerService.subscribe(show.id, show.name)
+      .subscribe()
   }
 
 }

@@ -4,6 +4,7 @@ import {SearchComponent} from './search.component';
 import {Route, RouterModule} from '@angular/router';
 import {TvMazeService} from '../../services/tv-maze.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import {TvtrackerService} from '../../services/tvtracker.service';
 
 const ROUTES: Route[] = [
   { path: 'search', component: SearchComponent}
@@ -16,7 +17,10 @@ const ROUTES: Route[] = [
     RouterModule.forChild(ROUTES)
   ],
   declarations: [SearchComponent],
-  providers: [TvMazeService]
+  providers: [
+    TvMazeService,
+    TvtrackerService
+  ]
 
 })
 export class SearchModule { }
