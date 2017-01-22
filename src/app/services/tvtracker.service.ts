@@ -3,7 +3,7 @@ import {Http, Headers} from '@angular/http';
 
 @Injectable()
 export class TvtrackerService {
-  _url = 'http://localhost:8080'
+  _url = 'http://192.168.1.52:8080'
 
   constructor(private _http: Http) { }
 

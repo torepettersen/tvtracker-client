@@ -1,0 +1,21 @@
+
+nav.navbar.navbar-toggleable-sm.fixed-top.navbar-inverse.bg-inverse
+    button.navbar-toggler.navbar-toggler-right(type='button' data-toggle='collapse', data-target='#navbar', aria-controls='navbar' aria-expand='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    a.navbar-brand(routerLink='/') TV tracker
+    .collapse.navbar-collapse(id='navbar')
+      ul.navbar-nav.mr-auto
+        li.nav-item(routerLinkActive='active')
+          a.nav-link(routerLink='/episodes') Episodes
+        li.nav-item(routerLinkActive='active')
+          a.nav-link(routerLink='/calender') Calender
+        li.nav-item(routerLinkActive='active')
+          a.nav-link(routerLink='/search') Add shows
+      ul.nav.navbar-nav.float-xs-right(*ngIf='!userService.isAuthenticated()')
+        li.nav-item
+          a.nav-link(routerLink='/login') Login
+        li.nav-item
+          a.nav-link(routerLink='/signup') Sign up
+      ul.nav.navbar-nav.float-xs-right(*ngIf='userService.isAuthenticated()')
+        li.nav-item
+          a.nav-link(routerLink='/', (click)='userService.logout()') Logout

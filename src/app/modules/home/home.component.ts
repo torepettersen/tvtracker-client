@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
                 return new Date(episode.airstamp).getTime() > Date.now()
               })
               show.previousEpisode = episodes.reverse().find((episode: Episode) => {
-                return new Date(episode.airstamp).getTime() < Date.now()
+                return episode.airstamp && new Date(episode.airstamp).getTime() < Date.now()
               })
 
               let idx = this.shows.indexOf(show)

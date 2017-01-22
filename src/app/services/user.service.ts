@@ -11,7 +11,7 @@ export class UserService {
 
 
   constructor(private http: Http, private router: Router) {
-    this._url = 'http://localhost:8080'
+    this._url = 'http://192.168.1.52:8080'
     let token = localStorage.getItem('Authorization')
     this._token = token ? token : null
   }

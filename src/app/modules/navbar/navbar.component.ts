@@ -3,7 +3,7 @@ import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'navbar',
-  templateUrl: './navbar.component.html',
+  templateUrl: 'navbar.component.html',
   styleUrls: ['./navbar.component.sass']
 })
 export class NavbarComponent implements OnInit {

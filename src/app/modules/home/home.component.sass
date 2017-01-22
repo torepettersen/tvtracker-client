@@ -1,10 +1,25 @@
 
 p
-  white-space: pre
+  width: 100%
+  //white-space: pre
+  @media(max-width: 576px)
+    word-wrap: break-word
+
+img
+  @media(max-width: 576px)
+    width: 80px
+    margin-top: 5px
+    margin-right: 5px
 
 table
-  display: inline-block
+  @media(max-width: 576px)
+    display: inline-block
+  //.table
+    min-width: 1200px
 
 th
-  @media (min-width: 1200px)
-    width: 100%
+  @media(max-width: 576px)
+    padding: 0
+    max-width: 250px
+
+

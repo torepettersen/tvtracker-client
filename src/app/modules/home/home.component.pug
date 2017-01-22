@@ -8,13 +8,15 @@
           tr(*ngFor='let show of (shows | orderByAirdate:"nextEpisode")')
             th.th-img
               img.rounded(src='{{show.image?.medium}}')
-            th
+            th.max-width
               h4 {{show.name}}
               h5 Next episode
 
               p
                 | Name: {{show.nextEpisode?.name}}
+                br
                 | Local Date: {{show.nextEpisode?.airstamp | date:'EEE MMM d, y'}}
+                br
                 | Local Time: {{show.nextEpisode?.airstamp | date:'H:mm'}}
     .col-xl-6.col-sm-12
       h1 Most recent shows
@@ -28,7 +30,9 @@
 
               p
                 | Name: {{show.previousEpisode?.name}}
+                br
                 | Local Date: {{show.previousEpisode?.airstamp | date:'EEE MMM d, y'}}
+                br
                 | Local Time: {{show.previousEpisode?.airstamp | date:'H:mm'}}
             th.th-img
               img.rounded(src='{{show.image?.medium}}')
