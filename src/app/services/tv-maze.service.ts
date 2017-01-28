@@ -16,13 +16,12 @@ export class TvMazeService {
 
     return this._http.get(this._url + '/search/shows', {search})
       .map(res => {
-        let data = res.json()
-        let shows: Array<Show> = []
-        for(let show of data) {
-          shows.push(show.show)
-        }
-
-        return shows
+        return res.json().map(res => {
+          let show = res.show
+          show.tvmazeId = show.id
+          show.id = null
+          return show
+        })
       })
   }
 

@@ -18,6 +18,7 @@ import {TvtrackerService} from '../../services/tvtracker.service';
 export class SearchComponent implements OnInit {
   searchForm : FormGroup
   shows: Show[]
+  subscribedShows: Show[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -27,8 +28,13 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.tvtrackerService.subscribedShows()
+      .subscribe(res => {
+        this.subscribedShows = res
+      })
     this.buildForm()
     this.searchObserver()
+    //this.searchForm.controls['search'].setValue('suits')
   }
 
   buildForm() {
@@ -56,8 +62,18 @@ export class SearchComponent implements OnInit {
   }
 
   subscribe(show: Show) {
-    this.tvtrackerService.subscribe(show.id, show.name)
-      .subscribe()
+    this.tvtrackerService.subscribe(show.tvmazeId)
+  }
+  
+  unsubscribe(show: Show) {
+    let id = this.subscribedShows.find((subscribedShow: Show) => {
+      if(subscribedShow.tvmazeId === show.tvmazeId) return true
+    }).id
+    this.tvtrackerService.unsubscribe(id)
+  }
+  
+  isSubscribed(show: Show) : boolean {
+    return this.subscribedShows.some((subscribedShow: Show) => subscribedShow.tvmazeId === show.tvmazeId)
   }
 
 }
