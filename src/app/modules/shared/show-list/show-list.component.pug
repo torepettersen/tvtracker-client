@@ -7,6 +7,6 @@
       span([innerHtml]='show.summary')
     div
       .btn-group
-        button.btn.btn-success(*ngIf='!isSubscribed(show)', type='button', (click)='subscribe(show)') Subscribe
-        button.btn.btn-danger(*ngIf='isSubscribed(show)', type='button', (click)='unsubscribe(show)') Unsubscribe
+        button.btn.btn-success(*ngIf='!isSubscribed(show) && _userService.isAuthenticated()', type='button', (click)='subscribe(show)') Subscribe
+        button.btn.btn-danger(*ngIf='isSubscribed(show) && _userService.isAuthenticated()', type='button', (click)='unsubscribe(show)') Unsubscribe
         //button.btn.btn-info(type="button") Episodes

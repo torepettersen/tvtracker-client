@@ -1,5 +1,10 @@
 
-.container
+.landing(*ngIf='!_userService.isAuthenticated()')
+  h1 TV Tracker
+  hr
+
+
+.container(*ngIf='_userService.isAuthenticated()')
   .row
     .col-xl-6.col-sm-12
       h1 Upcoming shows

@@ -2,6 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map'
 import {Router} from '@angular/router';
+import {TvtrackerService} from './tvtracker.service'
 
 @Injectable()
 export class UserService {
@@ -10,7 +11,11 @@ export class UserService {
   _token: string
 
 
-  constructor(private http: Http, private router: Router) {
+  constructor(
+    private _http: Http,
+    private _router: Router,
+    private _tvtrackerService: TvtrackerService
+  ) {
     this._url = 'http://192.168.1.52:8080'
     let token = localStorage.getItem('Authorization')
     this._token = token ? token : null
@@ -22,7 +27,7 @@ export class UserService {
 
     let body = 'email=' + email+ '&password=' + password
 
-    return this.http.post(
+    return this._http.post(
       this._url + '/login',
       body,
       { headers: headers }
@@ -32,6 +37,7 @@ export class UserService {
         if(token) {
           this._token = token
           localStorage.setItem('Authorization', token)
+          this._tvtrackerService.update()
           return true
         }
         return false
@@ -44,7 +50,7 @@ export class UserService {
 
     let body = 'email=' + email+ '&password=' + password
 
-    return this.http.post(
+    return this._http.post(
       'http://localhost:8080/signup',
       body,
       { headers: headers }

@@ -11,6 +11,7 @@ import {LoginModule} from './modules/login';
 import {SearchModule} from './modules/search';
 import {HomeModule} from './modules/home';
 import {SubscribedModule} from './modules/subscribed'
+import {UserService} from './services/user.service'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {SubscribedModule} from './modules/subscribed'
     SearchModule,
     SubscribedModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

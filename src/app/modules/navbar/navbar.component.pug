@@ -5,14 +5,14 @@ nav.navbar.navbar-toggleable-sm.fixed-top.navbar-inverse.bg-inverse
     a.navbar-brand(routerLink='/') TV tracker
     .collapse.navbar-collapse(id='navbar')
       ul.navbar-nav.mr-auto
-        li.nav-item(routerLinkActive='active')
+        li.nav-item(routerLinkActive='active', *ngIf='userService.isAuthenticated()')
           a.nav-link(routerLink='/subscribed') Subscribed shows
         //li.nav-item(routerLinkActive='active')
           a.nav-link(routerLink='/episodes') Episodes
         //li.nav-item(routerLinkActive='active')
           a.nav-link(routerLink='/calender') Calender
         li.nav-item(routerLinkActive='active')
-          a.nav-link(routerLink='/search') Add shows
+          a.nav-link(routerLink='/search') Search
       ul.nav.navbar-nav.float-xs-right(*ngIf='!userService.isAuthenticated()')
         li.nav-item
           a.nav-link(routerLink='/login') Login

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {ReplaySubject, Observable} from 'rxjs'
 import {Show} from '../interfaces'
+import {UserService} from './user.service'
 //import 'rxjs/add/operator/catch'
 
 @Injectable()
@@ -9,9 +10,18 @@ export class TvtrackerService {
   _url = 'http://192.168.1.52:8080'
   _shows: ReplaySubject<Show[]> = new ReplaySubject()
 
-  constructor(private _http: Http) {
-    this.getSubscribedShows()
-      .subscribe(shows => this._shows.next(shows))
+  constructor(
+    private _http: Http,
+    //private _userService: UserService
+  ) {
+    this.update()
+  }
+  
+  update() {
+    //if(this._userService.isAuthenticated()) {
+      this.getSubscribedShows()
+        .subscribe(shows => this._shows.next(shows))
+    //}
   }
 
   subscribedShows(): ReplaySubject<Show[]> {

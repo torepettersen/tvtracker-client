@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core'
 import {Show} from '../../../interfaces'
 import {TvtrackerService} from '../../../services/tvtracker.service'
+import {UserService} from '../../../services/user.service'
 
 
 @Component({
@@ -14,25 +15,26 @@ export class ShowListComponent implements OnInit {
   subscribedShows: Show[] = []
   
   constructor(
-    private tvtrackerService: TvtrackerService
+    private _tvtrackerService: TvtrackerService,
+    private _userService: UserService
   ) {}
   
   ngOnInit() {
-    this.tvtrackerService.subscribedShows()
+    this._tvtrackerService.subscribedShows()
       .subscribe(res => {
         this.subscribedShows = res
       })
   }
   
   subscribe(show: Show) {
-    this.tvtrackerService.subscribe(show.tvmazeId)
+    this._tvtrackerService.subscribe(show.tvmazeId)
   }
   
   unsubscribe(show: Show) {
     let id = this.subscribedShows.find((subscribedShow: Show) => {
       if(subscribedShow.tvmazeId === show.tvmazeId) return true
     }).id
-    this.tvtrackerService.unsubscribe(id)
+    this._tvtrackerService.unsubscribe(id)
   }
   
   isSubscribed(show: Show) : boolean {
