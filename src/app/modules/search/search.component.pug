@@ -7,20 +7,4 @@
       .input-group([formGroup]='searchForm')
         span.input-group-addon Search
         input.form-control(type='text', autofocus, formControlName='search')
-  table.table
-    tbody
-      tr(*ngFor='let show of shows')
-        th.th-img
-          img.rounded(src='{{show.image?.medium}}')
-        th
-          h4 {{show.name}}
-          div([innerHtml]='show.summary')
-        th
-          .btn-group
-            button.btn.btn-success(*ngIf='!isSubscribed(show)', type='button', (click)='subscribe(show)') Subscribe
-            button.btn.btn-danger(*ngIf='isSubscribed(show)', type='button', (click)='unsubscribe(show)') Unsubscribe
-            button.btn.btn-info(type="button") Episodes
-
-
-
-
+  show-list([shows]='shows')

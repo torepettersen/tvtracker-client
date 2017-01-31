@@ -10,7 +10,7 @@ import {SignupModule} from './modules/signup';
 import {LoginModule} from './modules/login';
 import {SearchModule} from './modules/search';
 import {HomeModule} from './modules/home';
-import { OrderByAirdatePipe } from './pipes/order-by-airdate.pipe';
+import {SubscribedModule} from './modules/subscribed'
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { OrderByAirdatePipe } from './pipes/order-by-airdate.pipe';
     HomeModule,
     SignupModule,
     LoginModule,
-    SearchModule
+    SearchModule,
+    SubscribedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

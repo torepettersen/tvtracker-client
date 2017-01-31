@@ -8,7 +8,6 @@ import 'rxjs/add/operator/distinctUntilChanged'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/map'
 import {Show} from '../../interfaces';
-import {TvtrackerService} from '../../services/tvtracker.service';
 
 @Component({
   selector: 'app-search',
@@ -18,20 +17,14 @@ import {TvtrackerService} from '../../services/tvtracker.service';
 export class SearchComponent implements OnInit {
   searchForm : FormGroup
   shows: Show[]
-  subscribedShows: Show[] = []
 
   constructor(
     private fb: FormBuilder,
     private validationService: ValidationService,
     private tvMaze: TvMazeService,
-    private tvtrackerService: TvtrackerService
   ) { }
 
   ngOnInit() {
-    this.tvtrackerService.subscribedShows()
-      .subscribe(res => {
-        this.subscribedShows = res
-      })
     this.buildForm()
     this.searchObserver()
     //this.searchForm.controls['search'].setValue('suits')
@@ -60,20 +53,4 @@ export class SearchComponent implements OnInit {
   search(event : any) {
     this.tvMaze.search(event.target.value)
   }
-
-  subscribe(show: Show) {
-    this.tvtrackerService.subscribe(show.tvmazeId)
-  }
-  
-  unsubscribe(show: Show) {
-    let id = this.subscribedShows.find((subscribedShow: Show) => {
-      if(subscribedShow.tvmazeId === show.tvmazeId) return true
-    }).id
-    this.tvtrackerService.unsubscribe(id)
-  }
-  
-  isSubscribed(show: Show) : boolean {
-    return this.subscribedShows.some((subscribedShow: Show) => subscribedShow.tvmazeId === show.tvmazeId)
-  }
-
 }
