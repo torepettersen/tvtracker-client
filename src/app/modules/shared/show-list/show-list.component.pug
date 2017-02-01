@@ -1,11 +1,11 @@
 .row
-  .col-md-12.flex(*ngFor='let show of shows')
+  .col-sm-6.col-md-12.flex(*ngFor='let show of shows')
     div
       img.rounded(src='{{show.image?.medium}}', onerror='this.src="http://static.tvmaze.com/images/no-img/no-img-portrait-text.png"')
     div
       h4 {{show.name}}
       span([innerHtml]='show.summary')
-    div
+    div.right
       .btn-group
         button.btn.btn-success(*ngIf='!isSubscribed(show) && _userService.isAuthenticated()', type='button', (click)='subscribe(show)') Subscribe
         button.btn.btn-danger(*ngIf='isSubscribed(show) && _userService.isAuthenticated()', type='button', (click)='unsubscribe(show)') Unsubscribe

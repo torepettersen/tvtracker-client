@@ -2,8 +2,9 @@
 img
   max-width: 210px
 
-  //@include media-breakpoint-up(xs)
-    width: 80px
+span
+  @media(max-width: 767px)
+    display: none
 
 .flex
   display: flex
@@ -11,3 +12,9 @@ img
 
   div
     margin: 0 .5em
+
+  @media(max-width: 767px)
+    display: block
+
+    div
+      margin: .5em 0
