@@ -7,17 +7,14 @@ import {UserService} from '../../services/user.service';
   styleUrls: ['./navbar.component.sass']
 })
 export class NavbarComponent implements OnInit {
+  isCollapsed = true
 
-  constructor(private userService: UserService) { }
+  constructor(private _userService: UserService) { }
 
   ngOnInit() {
   }
-
-  isLoggedin() {
-    return this.userService.isAuthenticated()
-  }
-
-  logout() {
-    this.userService.logout()
+  
+  public get menuIcon(): string {
+    return this.isCollapsed ? '☰' : '✖';
   }
 }
