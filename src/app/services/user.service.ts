@@ -3,22 +3,22 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map'
 import {Router} from '@angular/router';
 import {TvtrackerService} from './tvtracker.service'
+import {ReplaySubject} from 'rxjs'
 
 @Injectable()
 export class UserService {
   //_headers: Headers
   _url: string
-  _token: string
+  //_token: string
+  _tokenObserver: ReplaySubject<string> = new ReplaySubject<string>()
 
 
   constructor(
-    private _http: Http,
-    private _router: Router,
-    private _tvtrackerService: TvtrackerService
+    private _http: Http
   ) {
     this._url = 'http://192.168.1.52:8080'
     let token = localStorage.getItem('Authorization')
-    this._token = token ? token : null
+    this._tokenObserver.next(token)
   }
 
   login(email: string, password: string) {
@@ -35,9 +35,8 @@ export class UserService {
       .map(res => {
         let token = res.json().token
         if(token) {
-          this._token = token
           localStorage.setItem('Authorization', token)
-          this._tvtrackerService.update()
+          this._tokenObserver.next(token)
           return true
         }
         return false
@@ -62,12 +61,16 @@ export class UserService {
   }
 
   logout() {
-    this._token = null
+    this._tokenObserver.next(null)
     localStorage.removeItem('Authorization')
   }
 
   isAuthenticated() {
-    return this._token ? true : false
+    return localStorage.getItem('Authorization') ? true : false
+  }
+  
+  getTokenObserver(): ReplaySubject<string> {
+    return this._tokenObserver
   }
 
 }

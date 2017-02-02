@@ -12,16 +12,13 @@ export class TvtrackerService {
 
   constructor(
     private _http: Http,
-    //private _userService: UserService
+    private _userService: UserService
   ) {
-    this.update()
-  }
-  
-  update() {
-    //if(this._userService.isAuthenticated()) {
-      this.getSubscribedShows()
-        .subscribe(shows => this._shows.next(shows))
-    //}
+    
+    this._userService.getTokenObserver()
+      .filter(token => token != null)
+      .flatMap(() => this.getSubscribedShows())
+      .subscribe(shows => this._shows.next(shows))
   }
 
   subscribedShows(): ReplaySubject<Show[]> {
