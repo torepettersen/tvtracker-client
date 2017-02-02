@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {ValidationService} from '../form';
 import {UserService} from '../../services/user.service';
+import {SharedValidators} from '../shared/sharedValidators'
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,11 @@ export class SignupComponent implements OnInit {
 
   buildForm() {
     this.signupForm = this.fb.group({
-      'email': ['', [Validators.required]],
+      'email': ['', [
+        Validators.required,
+        Validators.maxLength(255),
+        SharedValidators.email
+      ]],
       'password': ['', Validators.required]
     })
   }

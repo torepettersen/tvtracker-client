@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {ValidationService} from '../form/form-validation.service';
 import {Router} from '@angular/router';
+import {SharedValidators} from '../shared/sharedValidators'
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,11 @@ export class LoginComponent implements OnInit {
 
   buildForm() {
     this.loginForm = this.fb.group({
-      'email': ['', [Validators.required]],
+      'email': ['', [
+        Validators.required,
+        Validators.maxLength(255),
+        SharedValidators.email
+      ]],
       'password': ['', Validators.required]
     })
   }
@@ -47,5 +52,7 @@ export class LoginComponent implements OnInit {
   showError(control: FormControl) {
     return this.validationService.showError(control)
   }
+  
+  
 
 }

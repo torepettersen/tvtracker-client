@@ -17,9 +17,10 @@ export class ValidationService {
     let config = {
       'required': 'Required',
       'invalidCreditCard': 'Is invalid credit card number',
-      'invalidEmailAddress': 'INo email address',
+      'invalidEmail': 'Invalid email address',
       'invalidPassword': 'Invalid password. Password must be at least 60 characters long, and contain a number.',
-      'minlength': `Minimum length ${validatorValue.requiredLength}`
+      'minlength': `Minimum length ${validatorValue.requiredLength}`,
+      'maxlength': `Maximum length ${validatorValue.requiredLength}`
     };
 
     return config[validatorName];

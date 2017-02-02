@@ -5,6 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './login.component';
 import {FormModule} from '../form/form.module';
 import {UserService} from '../../services/user.service';
+import {SharedModule} from '../shared/index'
 
 const ROUTES: Route[] = [
   { path: 'login', component: LoginComponent}
@@ -13,6 +14,7 @@ const ROUTES: Route[] = [
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild(ROUTES),
     FormModule
