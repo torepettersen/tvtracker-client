@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {ValidationService} from '../form';
 import {UserService} from '../../services/user.service';
 import {SharedValidators} from '../shared/sharedValidators'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-signup',
@@ -13,9 +14,10 @@ export class SignupComponent implements OnInit {
   signupForm : FormGroup
 
   constructor(
-    private fb: FormBuilder,
-    private validationService: ValidationService,
-    private userService: UserService
+    private _fb: FormBuilder,
+    private _validationService: ValidationService,
+    private _userService: UserService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -23,28 +25,35 @@ export class SignupComponent implements OnInit {
   }
 
   buildForm() {
-    this.signupForm = this.fb.group({
+    this.signupForm = this._fb.group({
       'email': ['', [
         Validators.required,
         Validators.maxLength(255),
-        SharedValidators.email
-      ]],
-      'password': ['', Validators.required]
+        SharedValidators.email,
+      ],
+        SharedValidators.shouldBeUnique(this._userService)
+      ],
+      'password': ['', [
+        Validators.required,
+        Validators.minLength(5)
+      ]]
     })
   }
 
   signup() {
     if(!this.signupForm.valid) return;
 
-    this.userService.signup(
+    this._userService.signup(
       this.signupForm.value.email,
       this.signupForm.value.password
     )
-      .subscribe(res => {})
+      .subscribe(
+        res => this._router.navigateByUrl('/')
+      )
   }
 
   showError(control: FormControl) {
-    return this.validationService.showError(control)
+    return this._validationService.showError(control)
   }
 
 

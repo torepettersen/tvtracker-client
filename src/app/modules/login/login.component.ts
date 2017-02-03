@@ -4,6 +4,7 @@ import {UserService} from '../../services/user.service';
 import {ValidationService} from '../form/form-validation.service';
 import {Router} from '@angular/router';
 import {SharedValidators} from '../shared/sharedValidators'
+import {IAlert} from '../../interfaces'
 
 @Component({
   selector: 'app-login',
@@ -12,12 +13,13 @@ import {SharedValidators} from '../shared/sharedValidators'
 })
 export class LoginComponent implements OnInit {
   loginForm : FormGroup
+  alert: IAlert
 
   constructor(
-    private fb: FormBuilder,
-    private validationService: ValidationService,
-    private userService: UserService,
-    private router: Router
+    private _fb: FormBuilder,
+    private _validationService: ValidationService,
+    private _userService: UserService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -25,32 +27,39 @@ export class LoginComponent implements OnInit {
   }
 
   buildForm() {
-    this.loginForm = this.fb.group({
+    this.loginForm = this._fb.group({
       'email': ['', [
         Validators.required,
         Validators.maxLength(255),
         SharedValidators.email
       ]],
-      'password': ['', Validators.required]
+      'password': ['',[
+        Validators.required,
+        Validators.minLength(5)
+      ]]
     })
   }
 
   login() {
     if(!this.loginForm.valid) return;
 
-    this.userService.login(
+    this._userService.login(
       this.loginForm.value.email,
       this.loginForm.value.password
     )
-      .subscribe(success => {
-        if(success) {
-          this.router.navigateByUrl('/')
+      .subscribe(
+        res => this._router.navigateByUrl('/'),
+        err => {
+          this.alert = {
+            type: 'danger',
+            message: err
+          }
         }
-      })
+      )
   }
 
   showError(control: FormControl) {
-    return this.validationService.showError(control)
+    return this._validationService.showError(control)
   }
   
   

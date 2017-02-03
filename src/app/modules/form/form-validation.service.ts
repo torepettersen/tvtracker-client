@@ -18,6 +18,7 @@ export class ValidationService {
       'required': 'Required',
       'invalidCreditCard': 'Is invalid credit card number',
       'invalidEmail': 'Invalid email address',
+      'shouldBeUnique': 'Email already registered',
       'invalidPassword': 'Invalid password. Password must be at least 60 characters long, and contain a number.',
       'minlength': `Minimum length ${validatorValue.requiredLength}`,
       'maxlength': `Maximum length ${validatorValue.requiredLength}`

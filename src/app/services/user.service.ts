@@ -3,7 +3,7 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map'
 import {Router} from '@angular/router';
 import {TvtrackerService} from './tvtracker.service'
-import {ReplaySubject} from 'rxjs'
+import {ReplaySubject, Observable} from 'rxjs'
 
 @Injectable()
 export class UserService {
@@ -32,14 +32,17 @@ export class UserService {
       body,
       { headers: headers }
     )
-      .map(res => {
+      .flatMap(res => {
+        if(res.json().error) {
+          return Observable.throw(res.json().error)
+        }
+        
         let token = res.json().token
         if(token) {
           localStorage.setItem('Authorization', token)
           this._tokenObserver.next(token)
-          return true
         }
-        return false
+        return Observable.generate(res.json())
       })
   }
 
@@ -54,9 +57,11 @@ export class UserService {
       body,
       { headers: headers }
     )
-      .map(res => {
-        let user = res.json()
-        //return user
+      .flatMap(res => {
+        if(res.json().error) {
+          return Observable.throw(res.json().error)
+        }
+        return this.login(email, password)
       })
   }
 
@@ -71,6 +76,20 @@ export class UserService {
   
   getTokenObserver(): ReplaySubject<string> {
     return this._tokenObserver
+  }
+  
+  checkEmail(email: string) {
+    let headers = new Headers()
+    headers.append('Content-Type', 'application/x-www-form-urlencoded')
+  
+    let body = 'email=' + email
+  
+    return this._http.post(
+      'http://localhost:8080/checkemail',
+      body,
+      { headers: headers }
+    )
+      .map(res => res.json())
   }
 
 }

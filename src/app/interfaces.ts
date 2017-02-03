@@ -17,3 +17,8 @@ export interface Episode {
   number: number;
   url: string;
 }
+
+export interface IAlert {
+  type: string;
+  message: string;
+}

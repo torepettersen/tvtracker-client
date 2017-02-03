@@ -6,6 +6,7 @@ import {LoginComponent} from './login.component';
 import {FormModule} from '../form/form.module';
 import {UserService} from '../../services/user.service';
 import {SharedModule} from '../shared/index'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 
 const ROUTES: Route[] = [
   { path: 'login', component: LoginComponent}
@@ -15,6 +16,7 @@ const ROUTES: Route[] = [
   imports: [
     CommonModule,
     SharedModule,
+    NgbModule,
     ReactiveFormsModule,
     RouterModule.forChild(ROUTES),
     FormModule
