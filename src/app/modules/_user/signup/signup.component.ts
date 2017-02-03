@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import {ValidationService} from '../form';
-import {UserService} from '../../services/user.service';
-import {SharedValidators} from '../shared/sharedValidators'
+import {ValidationService} from '../../shared/form/form-validation.service'
+import {UserService} from '../../../services/user.service';
+import {SharedValidators} from '../../shared/sharedValidators'
 import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.sass']
+  templateUrl: 'signup.component.html',
+  styleUrls: ['signup.component.sass']
 })
 export class SignupComponent implements OnInit {
   signupForm : FormGroup

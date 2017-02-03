@@ -6,12 +6,11 @@ import { RouterModule } from '@angular/router'
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 
 import { AppComponent } from './app.component';
-import { NavbarModule } from './modules/navbar';
-import {SignupModule} from './modules/signup';
-import {LoginModule} from './modules/login';
-import {SearchModule} from './modules/search';
-import {HomeModule} from './modules/home';
-import {SubscribedModule} from './modules/subscribed'
+import { NavbarModule } from './modules/_navbar';
+import {SearchModule} from './modules/_search';
+import {HomeModule} from './modules/_home';
+import {SubscribedModule} from './modules/_subscribed'
+import {UserModule} from './modules/_user'
 import {UserService} from './services/user.service'
 
 @NgModule({
@@ -26,8 +25,7 @@ import {UserService} from './services/user.service'
     NgbModule.forRoot(),
     NavbarModule,
     HomeModule,
-    SignupModule,
-    LoginModule,
+    UserModule,
     SearchModule,
     SubscribedModule
   ],

@@ -5,7 +5,7 @@ import {ValidationService} from './form-validation.service';
 
 @Component({
   selector: 'form-control-group',
-  templateUrl: './form-control-group.html',
+  templateUrl: 'form-control-group.html',
   styles: [`
     span {
       font-size: 0.8em;

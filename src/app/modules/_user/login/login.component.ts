@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import {UserService} from '../../services/user.service';
-import {ValidationService} from '../form/form-validation.service';
+import {UserService} from '../../../services/user.service';
+import {ValidationService} from '../../shared/form/form-validation.service';
 import {Router} from '@angular/router';
-import {SharedValidators} from '../shared/sharedValidators'
-import {IAlert} from '../../interfaces'
+import {SharedValidators} from '../../shared/sharedValidators'
+import {IAlert} from '../../../interfaces'
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  templateUrl: 'login.component.html',
+  styleUrls: ['login.component.sass']
 })
 export class LoginComponent implements OnInit {
   loginForm : FormGroup
