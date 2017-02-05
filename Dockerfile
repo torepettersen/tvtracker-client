@@ -8,7 +8,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Install angular cli
-RUN npm install -g angular-cli@1.0.0-beta.26
+RUN npm install -g @angular/cli@1.0.0-beta.30
 
 # Copy dependency definitions
 COPY package.json /usr/src/app
