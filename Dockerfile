@@ -1,20 +1,3 @@
-# Create image based on the official Node 6 image from dockerhub
-FROM node:6
-
-# Create a directory where our app will be placed
-RUN mkdir -p /usr/src/app
-
-# Change directory so that our commands run inside this new directory
-WORKDIR /usr/src/app
-
-# Install angular cli
-RUN npm install -g @angular/cli@1.0.0-beta.30
-
-# Copy dependency definitions
-COPY package.json /usr/src/app
-
-# Install dependecies
-RUN npm install
-
-# Expose the port the app runs in
-EXPOSE 4200
+FROM nginx:1.11
+COPY nginx.conf /etc/nginx
+COPY dist /usr/share/nginx/html
