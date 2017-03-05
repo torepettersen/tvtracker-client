@@ -12,6 +12,7 @@ import {HomeModule} from './modules/_home';
 import {SubscribedModule} from './modules/_subscribed'
 import {UserModule} from './modules/_user'
 import {UserService} from './services/user.service'
+import {ScheduleModule} from './modules/_schedule';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {UserService} from './services/user.service'
     HomeModule,
     UserModule,
     SearchModule,
-    SubscribedModule
+    SubscribedModule,
+    ScheduleModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

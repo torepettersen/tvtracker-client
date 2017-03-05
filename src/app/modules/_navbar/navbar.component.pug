@@ -7,6 +7,8 @@ nav.navbar.navbar-toggleable-sm.fixed-top.navbar-inverse.bg-inverse
       ul.navbar-nav.mr-auto
         li.nav-item(routerLinkActive='active', *ngIf='_userService.isAuthenticated()')
           a.nav-link(routerLink='/subscribed', (click)='isCollapsed = true') Subscribed shows
+        li.nav-item(routerLinkActive='active', *ngIf='_userService.isAuthenticated()')
+          a.nav-link(routerLink='/schedule', (click)='isCollapsed = true') Schedule
         li.nav-item(routerLinkActive='active')
           a.nav-link(routerLink='/search', (click)='isCollapsed = true') Search
       ul.nav.navbar-nav.float-xs-right(*ngIf='!_userService.isAuthenticated()')

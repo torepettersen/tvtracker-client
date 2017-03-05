@@ -1,0 +1,52 @@
+
+.container
+  //h1 Calender
+
+  .row
+    .col-md-4
+      .btn-group
+        .btn.btn-primary(
+          mwlCalendarPreviousView,
+          [view]='view',
+          [(viewDate)]='viewDate',
+          (click)='activeDayIsOpen = false'
+        ) Previous
+        .btn.btn-secondary(
+          mwlCalendarToday,
+          [(viewDate)]='viewDate',
+          (click)='activeDayIsOpen = false'
+        ) Today
+        .btn.btn-primary(
+          mwlCalendarNextView,
+          [view]='view',
+          [(viewDate)]='viewDate',
+          (click)='activeDayIsOpen = false'
+          ) Next
+    .col-md-4.text-center
+      h3 {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+    .col-md-4.text-right
+      .btn-group
+        .btn.btn-primary((click)='view = "month"', [class.active]='view === "month"') Month
+        .btn.btn-primary((click)='view = "week"', [class.active]='view === "week"') Week
+        .btn.btn-primary((click)='view = "day"', [class.active]='view === "day"') Day
+  br
+  div([ngSwitch]='view')
+    mwl-calendar-month-view(
+      *ngSwitchCase='"month"',
+      [viewDate]='viewDate',
+      [activeDayIsOpen]='activeDayIsOpen',
+      [events]='events',
+      [weekStartsOn]='1',
+      (dayClicked)='dayClicked($event.day)'
+    )
+    mwl-calendar-week-view(
+      *ngSwitchCase='"week"',
+      [viewDate]='viewDate',
+      [events]='events',
+      [weekStartsOn]='1'
+    )
+    mwl-calendar-day-view(
+      *ngSwitchCase='"day"',
+      [viewDate]='viewDate',
+      [events]='events'
+    )

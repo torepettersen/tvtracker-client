@@ -16,6 +16,7 @@ export interface Episode {
   season: number;
   number: number;
   url: string;
+  showId: number;
 }
 
 export interface IAlert {
