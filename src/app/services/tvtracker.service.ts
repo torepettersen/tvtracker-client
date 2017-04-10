@@ -42,7 +42,7 @@ export class TvtrackerService {
     headers.append('Content-Type', 'application/json')
     headers.append('Authorization', token)
 
-    return this._http.get(this._url + '/subscribed', {headers: headers})
+    return this._http.get(`${this._url}/subscriptions`, {headers: headers})
       .map(res => res.json().shows)
   }
   
@@ -68,7 +68,7 @@ export class TvtrackerService {
     headers.append('Authorization', token)
 
     this._http.post(
-      this._url + '/subscribe',
+      `${this._url}/subscriptions`,
       'tvmazeId=' + tvmazeId,
       {headers: headers}
     )
@@ -78,14 +78,10 @@ export class TvtrackerService {
   unsubscribe(id: number) {
     let token = localStorage.getItem('Authorization')
     let headers = new Headers()
-    headers.append('Content-Type', 'application/x-www-form-urlencoded')
+    headers.append('Content-Type', 'application/json')
     headers.append('Authorization', token)
     
-    this._http.post(
-      this._url + '/unsubscribe',
-      'id=' + id,
-      {headers: headers}
-    )
+    this._http.delete(`${this._url}/subscriptions/${id}`, {headers: headers})
       .subscribe(res => this._shows.next(res.json().shows))
   }
 }
