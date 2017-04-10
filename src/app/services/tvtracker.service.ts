@@ -4,10 +4,11 @@ import {ReplaySubject, Observable} from 'rxjs'
 import {Show, Episode} from '../interfaces'
 import {UserService} from './user.service'
 import {TvMazeService} from './tv-maze.service'
+import { environment } from '../../environments/environment'
 
 @Injectable()
 export class TvtrackerService {
-  _url = 'http://192.168.1.52:8080'
+  _url = environment.api_url
   _shows: ReplaySubject<Show[]> = new ReplaySubject()
   _episodes: ReplaySubject<Episode[]> = new ReplaySubject()
 
@@ -20,8 +21,11 @@ export class TvtrackerService {
     this._userService.getTokenObserver()
       .filter(token => token != null)
       .flatMap(() => this.getSubscribedShows())
-      .map(shows => this._shows.next(shows))
-      .subscribe(() => this.getSubscribedEpisodes())
+      .flatMap(shows => {
+        this._shows.next(shows)
+        return this.getSubscribedEpisodes(shows)
+      })
+      .subscribe((episodes) => this._episodes.next(episodes))
   }
 
   subscribedShows(): ReplaySubject<Show[]> {
@@ -42,23 +46,18 @@ export class TvtrackerService {
       .map(res => res.json().shows)
   }
   
-  getSubscribedEpisodes() {
-    let episodes: Episode[] = []
-    
-    this._shows
-      .flatMap((shows: Show[]) => Observable.from(shows))
+  getSubscribedEpisodes(shows: Show[]): Observable<Episode[]> {
+    let episodes : Episode[] = []
+    return Observable.from(shows)
       .flatMap((show: Show) => {
         return this._tvmazeSerive.getEpisodes(show.tvmazeId)
-          .map((episodes: Episode[]) => {
-            episodes.forEach(episode => {
+          .map((e: Episode[]) => {
+            e.forEach(episode => {
               episode.showId = show.id
             })
+            episodes = episodes.concat(e)
             return episodes
           })
-      })
-      .subscribe((e: Episode[]) => {
-        episodes = episodes.concat(e)
-        this._episodes.next(episodes)
       })
   }
 

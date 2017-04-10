@@ -1,22 +1,19 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map'
-import {Router} from '@angular/router';
-import {TvtrackerService} from './tvtracker.service'
 import {ReplaySubject, Observable} from 'rxjs'
+import { environment } from '../../environments/environment'
 
 @Injectable()
 export class UserService {
-  //_headers: Headers
   _url: string
-  //_token: string
   _tokenObserver: ReplaySubject<string> = new ReplaySubject<string>()
 
 
   constructor(
     private _http: Http
   ) {
-    this._url = 'http://192.168.1.52:8080'
+    this._url = environment.api_url
     let token = localStorage.getItem('Authorization')
     this._tokenObserver.next(token)
   }
@@ -53,7 +50,7 @@ export class UserService {
     let body = 'email=' + email+ '&password=' + password
 
     return this._http.post(
-      'http://localhost:8080/signup',
+      this._url + '/signup',
       body,
       { headers: headers }
     )
@@ -85,7 +82,7 @@ export class UserService {
     let body = 'email=' + email
   
     return this._http.post(
-      'http://localhost:8080/checkemail',
+      this._url + '/checkemail',
       body,
       { headers: headers }
     )

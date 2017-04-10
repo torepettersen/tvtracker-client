@@ -35,6 +35,7 @@ export class ScheduleComponent implements OnInit {
       this._tvtrackerService.subscribedEpisodes()
         .subscribe(episodes => {
           let e = []
+          //console.log(episodes)
           episodes.forEach(episode => {
             let color: any = {}
             let show = this.shows.find(show => show.id === episode.showId)
